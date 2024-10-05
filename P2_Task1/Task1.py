@@ -62,13 +62,13 @@ calc = Task1Calculator()
 print(calc.evaluate("((3.5 + 4.9) - (10 ➗ 2)) ✕ 3.40"))  # Output: 11.56
 
 # Division by zero
-print(calc.evaluate("5 ➗ 0"))  # Output: undefined
+print(calc.evaluate("4 ➗ 0"))  # Output: undefined
 
 # nth root (cube root of 27)
 print(calc.evaluate("3√27"))  # Output: 3.0
 
 # Large number
-print(calc.evaluate("99999"))  # Output: 99999
+print(calc.evaluate("99999^9"))  # Output: 999910003599916001259987400083999640000899999
 
 # Overflow case
 print(calc.evaluate("14567853455434591234 + 234321427837402492"))  # Large number output
