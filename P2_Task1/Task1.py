@@ -72,3 +72,15 @@ print(calc.evaluate("99999^9"))  # Output: 9999100035999160012599874000839996400
 
 # Overflow case
 print(calc.evaluate("14567853455434591234 + 234321427837402492"))  # Large number output
+
+
+#Sin
+print(calc.evaluate("sin(1.0)")) #Output: 0.8414709848078965
+#Cos
+print(calc.evaluate("cos(1.0)")) #Output: 0.5403023058681398
+#Tan
+print(calc.evaluate("tan(1.0)")) #Output: 1.5574077246549023
+#Large Exponent
+print(calc.evaluate("20382799039274^2")) #Output: 415458496675429097394447076
+#Large Power
+print(calc.evaluate("263^10")) #Output: 1583279121786431447236849
