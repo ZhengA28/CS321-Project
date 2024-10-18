@@ -1,6 +1,6 @@
 import unittest
 import math
-from task1_calculator import Task1Calculator
+from Task1 import Task1Calculator
 
 class TestTask1Calculator(unittest.TestCase):
     def setUp(self):
