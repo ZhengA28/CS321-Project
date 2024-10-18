@@ -24,8 +24,7 @@ class TestTask1Calculator(unittest.TestCase):
 
     def test_brackets(self):
         self.assertAlmostEqual(self.calc.evaluate("(2 + 3) ✕ 4"), 20)
-        self.assertAlmostEqual(self.calc.evaluate("((3 + 4) - (10 ➗ 2)) ✕ 3"), 9)
-
+        self.assertAlmostEqual(self.calc.evaluate("((3 + 4) - (10 ➗ 2)) ✕ 3"), 6)
     def test_order_of_precedence(self):
         self.assertAlmostEqual(self.calc.evaluate("2 + 3 ✕ 4"), 14)
         self.assertAlmostEqual(self.calc.evaluate("6 ➗ 2 ✕ 9"), 27)
@@ -40,7 +39,7 @@ class TestTask1Calculator(unittest.TestCase):
 
     def test_complex_expressions(self):
         expr = "sin(45) + cos(30) ✕ (2√16 - 3√27) ^ 2"
-        self.assertAlmostEqual(self.calc.evaluate(expr), 0.7071067811865476)
+        self.assertAlmostEqual(self.calc.evaluate(expr), 1.5731321849709863)
 
     def test_error_handling(self):
         self.assertIn("Error", self.calc.evaluate("2 + ✕ 3"))
