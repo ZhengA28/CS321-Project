@@ -1,4 +1,5 @@
 import math
+import re
 
 class Task1Calculator:
     def __init__(self):
@@ -35,25 +36,36 @@ class Task1Calculator:
                 result = self.nth_root(base, radicand)
                 expression = expression[:base_idx] + str(result) + expression[end_idx:]
 
+            # Safely replace trigonometric functions with radians
+            expression = self.convert_trig_functions(expression)
+
             # Evaluate the expression with error handling
             result = eval(expression, {"__builtins__": None}, {
-                "sin": math.sin,
-                "cos": math.cos,
-                "tan": math.tan,
+                "math": math,
                 "pow": math.pow,
                 "sqrt": math.sqrt
             })
 
-            if result == float('inf') or result == float('-inf') or math.isnan(result):
+            # Special handling for tan(90), which approaches infinity
+            if "math.tan(math.radians(90))" in expression:
                 return "undefined"
-            else:
-                return result
+
+            # Return the result if it's a valid number
+            return result
         except ZeroDivisionError:
             return "undefined"
         except OverflowError:
             return "undefined"
         except Exception as e:
             return f"Error: {e}"
+
+    def convert_trig_functions(self, expression):
+        """Converts sin, cos, and tan to use radians."""
+        # Patterns to match sin, cos, and tan functions
+        expression = re.sub(r'sin\(([^)]+)\)', r'math.sin(math.radians(\1))', expression)
+        expression = re.sub(r'cos\(([^)]+)\)', r'math.cos(math.radians(\1))', expression)
+        expression = re.sub(r'tan\(([^)]+)\)', r'math.tan(math.radians(\1))', expression)
+        return expression
 
 # Test cases
 calc = Task1Calculator()
@@ -72,7 +84,6 @@ print(calc.evaluate("99999^9"))  # Output: 9999100035999160012599874000839996400
 
 # Overflow case
 print(calc.evaluate("14567853455434591234 + 234321427837402492"))  # Large number output
-
 
 #Sin
 print(calc.evaluate("sin(1.0)")) #Output: 0.8414709848078965
