@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_project/pages/home.dart';
-import 'package:tutorial_project/pages/preset.dart';
-import 'package:tutorial_project/pages/user_profile.dart';
-import 'package:tutorial_project/pages/settings.dart';
+import 'pages/home.dart';
+import 'pages/preset.dart';
+import 'pages/user_profile.dart';
+import 'pages/settings.dart';
 
 void main() {
   runApp(MyApp());
