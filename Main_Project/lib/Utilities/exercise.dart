@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_project/Utilities/custom_timer.dart';
+import 'custom_timer.dart';
 
 class Exercise extends StatelessWidget {
   final String name; //Name of the exercise
