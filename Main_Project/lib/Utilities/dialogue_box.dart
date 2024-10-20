@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_project/Utilities/button.dart';
+import 'button.dart';
 
 ///Class for creating Dialogue Boxes
 class DialogueBox extends StatelessWidget {
