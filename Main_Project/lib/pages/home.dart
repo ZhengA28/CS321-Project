@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:tutorial_project/pages/preset.dart';
-import 'package:tutorial_project/pages/settings.dart';
-import 'package:tutorial_project/pages/user_profile.dart';
-import 'package:tutorial_project/Utilities/exercise.dart';
-import 'package:tutorial_project/Utilities/dialogue_box.dart';
+import 'preset.dart';
+import 'settings.dart';
+import 'user_profile.dart';
+import 'Utilities/exercise.dart';
+import 'Utilities/dialogue_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
