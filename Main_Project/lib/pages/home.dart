@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'preset.dart';
 import 'settings.dart';
 import 'user_profile.dart';
-import 'Utilities/exercise.dart';
-import 'Utilities/dialogue_box.dart';
+import '../Utilities/exercise.dart';
+import '../Utilities/dialogue_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
