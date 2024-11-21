@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+db.sqlite3
+
+# Django
+/migrations/__pycache__/
+
+# Flutter
+.dart_tool/
+.idea/
+build/
+
+# macOS
+.DS_Store
