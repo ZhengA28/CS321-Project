@@ -6,6 +6,9 @@ import 'settings.dart';
 import 'user_profile.dart';
 import '../Utilities/exercise.dart';
 import '../Utilities/dialogue_box.dart';
+import 'package:http/http.dart' as http; //fetching http requests
+import 'dart:convert'; // For JSON decoding
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -125,12 +128,32 @@ class HomePageState extends State<HomePage> {
 
             //List tile for workout routines
             ListTile(
-                leading: Icon(Icons.more_time_rounded),
-                title: Text("Preset Exercise"),
-                onTap: () {
-                  //Return to home page
-                })
-          ])),
+              leading: Icon(Icons.more_time_rounded),
+              title: Text("Preset Exercise"),
+              onTap: () async { //aysnc for get request testing 
+              // Fetch data from the API
+              const String url = 'http://127.0.0.1:8000/api/preset_exercises/'; 
+              try {
+                final response = await http.get(Uri.parse(url)); // app runs as normal while server waits for response
+
+              // Desired success code : 200
+              if (response.statusCode == 200) {
+                final data = jsonDecode(response.body); // Convert JSON string to Dart object
+                print('API Response: $data'); // Print data from API response to terminal
+              } else {
+                print('Failed to fetch data. Status code: ${response.statusCode}');
+              }         
+          } catch (e) {
+            print('Error fetching data: $e');
+          }
+
+          // Close the drawer after the fetch
+               Navigator.pop(context);
+              } ,
+            ),
+          ]),
+      ),
+
 
       //Create a button for adding exercises
       floatingActionButton: FloatingActionButton(
