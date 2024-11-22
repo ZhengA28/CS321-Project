@@ -10,30 +10,22 @@ class Custom_Timer{
   Custom_Timer(this.duration):
     remaining_time = duration;
 
-  /**
-   * Start the timer
-   */
+  ///Start the timer
   void start(){
 
   }
 
-  /**
-   * Pause the timer if it is running
-   */
+  ///Pause the timer if it is running
   void pause(){
 
   }
 
-  /**
-   * Stop timer and reset its duration
-   */
+  ///Stop timer and reset its duration
   void stop(){
 
   }
 
-  /**
-   * Resume timer if it is not running
-   */
+  ///Resume timer if it is not running
   void resume(){
 
   }

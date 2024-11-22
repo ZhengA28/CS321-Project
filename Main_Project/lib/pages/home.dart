@@ -19,13 +19,14 @@ class HomePageState extends State<HomePage> {
   final duration_controller = TextEditingController();
 
   int page_index = 0;
-  final List pages = [  //Array to store pages
+  final List pages = [
+    //Array to store pages
     ProfilePage(),
     SettingsPage(),
     PresetPage(),
   ];
 
-  List exercise_list = <Exercise>[];  //Array to store created exercises
+  List exercise_list = []; //Array to store created exercises
 
   ///Update the page index
   void updatePage(int index) {
@@ -43,27 +44,33 @@ class HomePageState extends State<HomePage> {
           text_controller: text_controller,
           duration_controller: duration_controller,
           onSave: saveExercise, //Save new exercise
-          onCancel: () => Navigator.of(context).pop(),  //Close dialogue box
+          onCancel: () => Navigator.of(context).pop(), //Close dialogue box
         );
       },
     );
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      exercise_list.removeAt(index);
+    });
+  }
+
+  void completeTask(index) {
+    setState(() {});
+  }
 
   ///Creates a new exercise object and add it to the list
   void saveExercise() {
     setState(() {
-      Exercise exercise = Exercise(text_controller.text,
-          Duration(seconds: int.parse(duration_controller.text)));
-      exercise_list.add(exercise);
+      exercise_list.add([text_controller.text, duration_controller.text]);
 
       //Clear the text box
       text_controller.clear();
       duration_controller.clear();
     });
-    Navigator.of(context).pop();  //Closes dialogue box after adding to list
+    Navigator.of(context).pop(); //Closes dialogue box after adding to list
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +106,9 @@ class HomePageState extends State<HomePage> {
             //Header of the drawer
             DrawerHeader(
                 child: Icon(
-                  Icons.timer,
-                  size: 50,
-                )),
+              Icons.timer,
+              size: 50,
+            )),
 
             //List tile for home page
             ListTile(
@@ -144,18 +151,31 @@ class HomePageState extends State<HomePage> {
 
       //Display the exercises that are added by the user
       body: ListView.builder(
-          itemCount: exercise_list.length,
+          itemCount: exercise_list.isEmpty ? 1 : exercise_list.length,
           itemBuilder: (context, index) {
-            return exercise_list[index];
+            if (exercise_list.isEmpty) {
+              return Center(
+                  child: Text(
+                      "No Exercise in Current Workout Plan",
+                      style: TextStyle(color: Colors.white, fontSize: 20)
+                  )
+              );
+            } else {
+              return Exercise(
+                  name : exercise_list[index][0],
+                  time : Duration(seconds: int.parse(exercise_list[index][1])),
+                  deleteExercise: (context) => deleteTask(index),
+                  completeExercise: (context) => completeTask(index));
+            }
           }),
 
-        /**
+      /**
          * body: Column - Creates columns containing multiple children vertically
          * body: Row - Creates rows containing multiple children horizontally
          * body: Listview - Similar to Column/Row but allows scrolling through screen if children size overflows the screen
          * body: Stack - stacks children on top of one another
          */
-        /*body: ListView(
+      /*body: ListView(
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly, //Aligns main axis of children accordingly
           //crossAxisAlignment: CrossAxisAlignment.start, //Aligns cross axis of children accordingly
           scrollDirection: Axis.vertical, //Specify which direction to scroll when body: Listview
@@ -187,17 +207,17 @@ class HomePageState extends State<HomePage> {
 
         ),*/
 
-        /**
+      /**
          * ListView.builder or GridView.builder can be used to create instances on demand
          */
-        /*body: ListView.builder(
+      /*body: ListView.builder(
             itemCount: names.length,  //Specify how many instances to create
             itemBuilder: (context, index) => ListTile(
               title: Text(names[index]),
             )
         ),*/
 
-        /*body: GridView.builder(
+      /*body: GridView.builder(
           itemCount: 20,  //Specify how many instances to create
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4), //Specify how many grid in each row
           itemBuilder: (context, index) => Container(
@@ -206,6 +226,6 @@ class HomePageState extends State<HomePage> {
             child: IconButton(onPressed:null, icon: Icon(Icons.access_time, color: Colors.black, size: 65)),
           )
       ),*/
-        );
+    );
   }
 }
