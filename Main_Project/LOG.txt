@@ -2,4 +2,4 @@
 
 -Andy Zheng
 -2024-11-21 10:48pm
--Made changes to exercise.dart and home_page.dart. Changed how exercise objects are created and added a slider to delete exercises. 
+-Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete exercises. 
