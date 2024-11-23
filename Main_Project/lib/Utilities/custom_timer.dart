@@ -6,26 +6,47 @@ class Custom_Timer{
   Duration remaining_time;  //remaining time of the timer
   bool is_running = false;  //is the timer currently running
 
+  Timer? time;
   //Constructor
   Custom_Timer(this.duration):
     remaining_time = duration;
 
-  ///Start the timer
+  /**
+   * Start the timer
+   */
   void start(){
+    if (!is_running && remaining_time.inSeconds > 0){
+      is_running = true;
+      time = Timer.periodic(const Duration(seconds: 1), (timer){
+        if (remaining_time.inSeconds <=0) {
+          timer.cancel();
+          is_running = false;
+        }
+        else{
+          remaining_time -= const Duration(seconds: 1);
+        }
+      });
 
+    }
   }
 
-  ///Pause the timer if it is running
+  /**
+   * Pause the timer if it is running
+   */
   void pause(){
 
   }
 
-  ///Stop timer and reset its duration
+  /**
+   * Stop timer and reset its duration
+   */
   void stop(){
 
   }
 
-  ///Resume timer if it is not running
+  /**
+   * Resume timer if it is not running
+   */
   void resume(){
 
   }
