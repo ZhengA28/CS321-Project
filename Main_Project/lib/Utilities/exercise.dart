@@ -21,11 +21,22 @@ class Exercise extends StatelessWidget {
     return name;
   }
 
+  String getTime(){
+    if (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60) < 10){
+      return timer.getDuration().inMinutes.toString() +
+          " : 0" +
+          (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60)).toString();
+    }
+    return timer.getDuration().inMinutes.toString() +
+        " : " +
+        (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60)).toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(
-            //Create padding around screen border
+          //Create padding around screen border
             left: 20.0,
             right: 20.0,
             top: 20.0),
@@ -45,11 +56,11 @@ class Exercise extends StatelessWidget {
               motion: StretchMotion(),
               children: [
                 SlidableAction(
-                    onPressed: completeExercise,
-                    icon: Icons.check_circle,
-                    backgroundColor: Colors.green.shade400,
-                    borderRadius: BorderRadius.circular(15),)
-          ]),
+                  onPressed: completeExercise,
+                  icon: Icons.check_circle,
+                  backgroundColor: Colors.green.shade400,
+                  borderRadius: BorderRadius.circular(15),)
+              ]),
 
           child: Container(
             padding: EdgeInsets.all(20.0), //Create padding within the container
@@ -70,27 +81,25 @@ class Exercise extends StatelessWidget {
                         ))),
                 Expanded(
                     child: Align(
-                  alignment: Alignment.topRight,
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        WidgetSpan(
-                            child: Padding(
-                                //Add padding to right of icon
-                                padding: EdgeInsets.only(right: 10),
-                                child: Icon(Icons.access_time,
-                                    color: Colors.white))),
-                        TextSpan(
-                            //Text to display the duration of timer
-                            text: timer.getDuration().inMinutes.toString() +
-                                " : " +
-                                timer.getDuration().inSeconds.toString(),
-                            style:
+                      alignment: Alignment.topRight,
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            WidgetSpan(
+                                child: Padding(
+                                  //Add padding to right of icon
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: Icon(Icons.access_time,
+                                        color: Colors.white))),
+                            TextSpan(
+                              //Text to display the duration of timer
+                                text: getTime(),
+                                style:
                                 TextStyle(fontSize: 20, color: Colors.white)),
-                      ],
-                    ),
-                  ),
-                )),
+                          ],
+                        ),
+                      ),
+                    )),
               ],
             ),
           ),
