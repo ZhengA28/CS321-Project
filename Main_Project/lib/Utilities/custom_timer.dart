@@ -34,21 +34,28 @@ class Custom_Timer{
    * Pause the timer if it is running
    */
   void pause(){
-
+    if (is_running){
+      time?.cancel();
+      is_running = false;
+    }
   }
 
   /**
    * Stop timer and reset its duration
    */
   void stop(){
-
+    time?.cancel();
+    is_running = false;
+    remaining_time = duration;
   }
 
   /**
    * Resume timer if it is not running
    */
   void resume(){
-
+    if (!is_running && remaining_time.inSeconds > 0) {
+      start();
+    }
   }
 
   /**
