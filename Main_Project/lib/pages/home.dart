@@ -57,7 +57,11 @@ class HomePageState extends State<HomePage> {
   }
 
   void completeTask(index) {
-    setState(() {});
+    setState(() {
+      List temp = exercise_list[index];
+      exercise_list.removeAt(index);
+      exercise_list.add(temp);
+    });
   }
 
   ///Creates a new exercise object and add it to the list
