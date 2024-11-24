@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'custom_timer.dart';
 
-class Exercise extends StatelessWidget {
+class Exercise extends StatefulWidget {
   final String name; //Name of the exercise
   Custom_Timer timer; //
   Function(BuildContext)? deleteExercise;
@@ -13,23 +13,29 @@ class Exercise extends StatelessWidget {
     required this.name,
     required Duration time,
     required Function(dynamic context) this.deleteExercise,
-    required Function(dynamic context) this.completeExercise}
-      ) : timer = Custom_Timer(time);
+    required Function(dynamic context) this.completeExercise})
+      : timer = Custom_Timer(time);
 
+  @override
+  State<Exercise> createState() => Exercise_State();
+}
+
+class Exercise_State extends State<Exercise> {
   ///Return name of exercise
   String getName() {
-    return name;
+    return widget.name;
   }
 
+  ///Display the current time
   String getTime(){
-    if (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60) < 10){
-      return timer.getDuration().inMinutes.toString() +
+    if (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60) < 10){
+      return widget.timer.getDuration().inMinutes.toString() +
           " : 0" +
-          (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60)).toString();
+          (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60)).toString();
     }
-    return timer.getDuration().inMinutes.toString() +
+    return widget.timer.getDuration().inMinutes.toString() +
         " : " +
-        (timer.getDuration().inSeconds - (timer.getDuration().inMinutes * 60)).toString();
+        (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60)).toString();
   }
 
   @override
@@ -46,7 +52,7 @@ class Exercise extends StatelessWidget {
               motion: StretchMotion(),
               children: [
                 SlidableAction(
-                    onPressed: deleteExercise,
+                    onPressed: widget.deleteExercise,
                     icon: Icons.delete_forever,
                     backgroundColor: Colors.red.shade400,
                     borderRadius: BorderRadius.circular(15))
@@ -56,7 +62,7 @@ class Exercise extends StatelessWidget {
               motion: StretchMotion(),
               children: [
                 SlidableAction(
-                  onPressed: completeExercise,
+                  onPressed: widget.completeExercise,
                   icon: Icons.check_circle,
                   backgroundColor: Colors.green.shade400,
                   borderRadius: BorderRadius.circular(15),)
@@ -76,9 +82,14 @@ class Exercise extends StatelessWidget {
                     child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          '$name',
+                          widget.name,
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ))),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                  )
+                ),
                 Expanded(
                     child: Align(
                       alignment: Alignment.topRight,
@@ -105,4 +116,6 @@ class Exercise extends StatelessWidget {
           ),
         ));
   }
+
 }
+

@@ -5,11 +5,11 @@ class Custom_Timer{
   Duration duration;  //time that the timer is set to
   Duration remaining_time;  //remaining time of the timer
   bool is_running = false;  //is the timer currently running
-
   Timer? time;
-  //Constructor
+
+  ///Constructor
   Custom_Timer(this.duration):
-    remaining_time = duration;
+        remaining_time = duration;
 
   /**
    * Start the timer
@@ -27,16 +27,6 @@ class Custom_Timer{
         }
       });
 
-    }
-  }
-
-  /**
-   * Pause the timer if it is running
-   */
-  void pause(){
-    if (is_running){
-      time?.cancel();
-      is_running = false;
     }
   }
 
