@@ -167,7 +167,7 @@ class HomePageState extends State<HomePage> {
             } else {
               return Exercise(
                   name : exercise_list[index][0],
-                  time : Duration(seconds: int.parse(exercise_list[index][1])),
+                  duration: Duration(seconds: int.parse(exercise_list[index][1])),
                   deleteExercise: (context) => deleteTask(index),
                   completeExercise: (context) => completeTask(index));
             }
