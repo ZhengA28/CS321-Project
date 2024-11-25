@@ -4,29 +4,52 @@ import 'pages/preset.dart';
 import 'pages/user_profile.dart';
 import 'pages/settings.dart';
 
+import 'package:provider/provider.dart'; // Import provider
+import 'Utilities/theme_provider.dart'; // Import ThemeProvider
+
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(), // ThemeProvider Global
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   MyApp({super.key});
   int time = 0;
   List names = ["Andy", "Karen", "Jacky", "Amy"];
 
   @override
   Widget build(BuildContext context) {
+    // Access the current theme state
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: const HomePage(), //Initial Page on app startup
-      theme: ThemeData(primarySwatch: Colors.teal), //Set theme color of app
+      // Set the theme based on ThemeProvider state
+      theme: themeProvider.isDarkMode
+          ? ThemeData.dark().copyWith(
+        colorScheme: ThemeData.dark().colorScheme.copyWith(
+          primary: Colors.teal,
+        ),
+      )
+          : ThemeData.light().copyWith(
+        colorScheme: ThemeData.light().colorScheme.copyWith(
+          primary: Colors.teal,
+        ),
+      ),
 
-      routes:{  //List of pages for navigation
-        '/homepage' : (context) => const HomePage(),
-        'presetpage' : (context) => const PresetPage(),
-        'profilepage' : (context) => const ProfilePage(),
-        'settingspage' : (context) => const SettingsPage(),
-      }
+      home: const HomePage(), // Initial Page on app startup
+
+      routes: { // List of pages for navigation
+        '/homepage': (context) => const HomePage(),
+        'presetpage': (context) => const PresetPage(),
+        'profilepage': (context) => const ProfilePage(),
+        'settingspage': (context) => const SettingsPage(),
+      },
     );
   }
 }
