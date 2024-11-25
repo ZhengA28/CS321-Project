@@ -1,41 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'custom_timer.dart';
+import 'dart:async';
 
 class Exercise extends StatefulWidget {
   final String name; //Name of the exercise
-  Custom_Timer timer; //
+  final Duration duration; //
+  Duration remaining_time;
   Function(BuildContext)? deleteExercise;
   Function(BuildContext)? completeExercise;
 
   ///Constructor
   Exercise({super.key,
     required this.name,
-    required Duration time,
+    required this.duration,
     required Function(dynamic context) this.deleteExercise,
-    required Function(dynamic context) this.completeExercise})
-      : timer = Custom_Timer(time);
+    required Function(dynamic context) this.completeExercise}
+      ) : remaining_time = duration;
 
   @override
   State<Exercise> createState() => Exercise_State();
 }
 
 class Exercise_State extends State<Exercise> {
+  bool playButton = false;
+  Timer? time;
+  bool is_running = false; //is the timer currently running
+
+
   ///Return name of exercise
   String getName() {
     return widget.name;
   }
 
-  ///Display the current time
-  String getTime(){
-    if (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60) < 10){
-      return widget.timer.getDuration().inMinutes.toString() +
-          " : 0" +
-          (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60)).toString();
+  ///Start the timer
+  void start() {
+    if (!is_running && widget.remaining_time.inSeconds > 0) {
+      print("Hello");
+      is_running = true;
+      time = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (widget.remaining_time.inSeconds <= 0) {
+          timer.cancel();
+          is_running = false;
+        }
+        else {
+          setState(() {
+            widget.remaining_time -= const Duration(seconds: 1);
+          });
+        }
+      });
     }
-    return widget.timer.getDuration().inMinutes.toString() +
+  }
+
+  ///Pause the timer
+  void Pause(){
+    time?.cancel();
+    is_running = false;
+    //widget.remaining_time = widget.duration;
+  }
+
+  ///Display the time
+  String getTime(){
+    if (widget.remaining_time.inSeconds - (widget.remaining_time.inMinutes * 60) < 10){
+      return widget.remaining_time.inMinutes.toString() +
+          " : 0" +
+          (widget.remaining_time.inSeconds - (widget.remaining_time.inMinutes * 60)).toString();
+    }
+    return widget.remaining_time.inMinutes.toString() +
         " : " +
-        (widget.timer.getDuration().inSeconds - (widget.timer.getDuration().inMinutes * 60)).toString();
+        (widget.remaining_time.inSeconds - (widget.remaining_time.inMinutes * 60)).toString();
   }
 
   @override
@@ -88,6 +121,22 @@ class Exercise_State extends State<Exercise> {
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          playButton = !playButton;
+
+                          if(playButton){
+                            start();
+                          }
+                          else {
+                            Pause();
+                          }
+                        });
+                      },
+                      icon: Icon(playButton ? Icons.pause_circle : Icons.play_circle),
+                      iconSize: 50,
+                      color: Colors.black,)
                   )
                 ),
                 Expanded(
