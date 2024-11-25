@@ -3,3 +3,7 @@
 -Andy Zheng
 -2024-11-21 10:48pm
 -Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete and finish exercises. 
+
+-Andy Zheng
+-2024-11-24 8:34pm
+-Added start/pause button to start timer and allowed the current time to be displayed. Made changes to exercise.dart.
