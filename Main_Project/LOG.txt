@@ -7,3 +7,9 @@
 -Andy Zheng
 -2024-11-24 8:34pm
 -Added start/pause button to start timer and allowed the current time to be displayed. Made changes to exercise.dart.
+
+-Martel Vasquez
+-2024-11-25 12:30am
+-Finished Settings UI and created theme(dark and light) file, theme_provider.dart.
+-TODO: Need to integrate Notifications and Allow Dark and Light mode to cover the whole system.
+-Make sure to add 'provider: 6.1.2' under dependencies in pubspec.yaml.
