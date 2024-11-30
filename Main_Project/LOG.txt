@@ -2,7 +2,8 @@
 
 -Andy Zheng
 -2024-11-21 10:48pm
--Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete and finish exercises. 
+-Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete and finish exercises.
+-Make sure to add 'flutter_slidable: ^3.1.1' under depenencies in pubspec.yaml
 
 -Andy Zheng
 -2024-11-24 8:34pm
