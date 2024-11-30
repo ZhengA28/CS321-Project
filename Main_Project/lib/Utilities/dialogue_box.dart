@@ -17,7 +17,6 @@ class DialogueBox extends StatelessWidget {
       required this.onSave,
       required this.onCancel});
 
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

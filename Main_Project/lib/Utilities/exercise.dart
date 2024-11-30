@@ -28,15 +28,9 @@ class Exercise_State extends State<Exercise> {
   bool is_running = false; //is the timer currently running
 
 
-  ///Return name of exercise
-  String getName() {
-    return widget.name;
-  }
-
   ///Start the timer
   void start() {
     if (!is_running && widget.remaining_time.inSeconds > 0) {
-      print("Hello");
       is_running = true;
       time = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (widget.remaining_time.inSeconds <= 0) {
@@ -53,7 +47,7 @@ class Exercise_State extends State<Exercise> {
   }
 
   ///Pause the timer
-  void Pause(){
+  void pause(){
     time?.cancel();
     is_running = false;
     //widget.remaining_time = widget.duration;
@@ -116,7 +110,7 @@ class Exercise_State extends State<Exercise> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           widget.name,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20),
                         ))),
                 Expanded(
                   child: Align(
@@ -130,13 +124,12 @@ class Exercise_State extends State<Exercise> {
                             start();
                           }
                           else {
-                            Pause();
+                            pause();
                           }
                         });
                       },
                       icon: Icon(playButton ? Icons.pause_circle : Icons.play_circle),
-                      iconSize: 50,
-                      color: Colors.black,)
+                      iconSize: 50)
                   )
                 ),
                 Expanded(
@@ -149,13 +142,14 @@ class Exercise_State extends State<Exercise> {
                                 child: Padding(
                                   //Add padding to right of icon
                                     padding: EdgeInsets.only(right: 10),
-                                    child: Icon(Icons.access_time,
-                                        color: Colors.white))),
+                                    child: Icon(Icons.access_time)
+                                )
+                            ),
                             TextSpan(
                               //Text to display the duration of timer
                                 text: getTime(),
-                                style:
-                                TextStyle(fontSize: 20, color: Colors.white)),
+                                style: TextStyle(fontSize: 20)
+                            ),
                           ],
                         ),
                       ),
