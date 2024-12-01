@@ -27,3 +27,10 @@
 -Created profile tab with editable text fields for username, email, and phone number.
 -Each field includes field validation. Save button currently saves to memory not persist data.
 -TODO: Change to save to persist data.
+
+-Andy Zheng
+-2024-12-01 5:00pm
+-Added Flutter Hive to store app data locally (data persistent)
+-Added additional file .../Database/local_data
+-Make sure to add 'hive: ^2.2.3' and 'hive_flutter: ^1.1.0' under dependencies in pubspec.yaml
+-Make sure to add 'hive_generator: ^1.1.3' and 'build_runner: ^2.1.11' under dev_dependencies in pubspec.yml
