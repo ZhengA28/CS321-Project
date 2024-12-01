@@ -21,3 +21,9 @@
 -Added ability to add the exercises from the presets to the home
 -Changed createExercise in home.dart to accept a String parameter to allow usage from preset page. Still functions like normal
 -TODO: Add the ability to watch tutorial videos of the exercises listed in the presets page
+
+-Laura Liu
+-2024-12-01 12:03am
+-Created profile tab with editable text fields for username, email, and phone number.
+-Each field includes field validation. Save button currently saves to memory not persist data.
+-TODO: Change to save to persist data.
