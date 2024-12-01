@@ -150,6 +150,15 @@ class HomePageState extends State<HomePage> {
                   Navigator.pushNamed(context, 'settingspage');
                 }),
 
+            //List tile for user profile
+            ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text("P R O F I L E"),
+                onTap: () {
+                  //Go to user profile page
+                  Navigator.pushNamed(context, 'profilepage');
+                }),
+
             //List tile for workout routines
             ListTile(
                 leading: Icon(Icons.more_time_rounded),
