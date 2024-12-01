@@ -129,7 +129,7 @@ class Exercise_State extends State<Exercise> {
                         });
                       },
                       icon: Icon(playButton ? Icons.pause_circle : Icons.play_circle),
-                      iconSize: 50)
+                      iconSize: 70)
                   )
                 ),
                 Expanded(

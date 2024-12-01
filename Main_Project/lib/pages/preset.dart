@@ -1,7 +1,7 @@
 //import 'package:url_launcher/link.dart';
-import 'package:Main_Project/pages/home.dart';
+import 'home.dart';
 import 'package:flutter/material.dart';
-import 'package:Main_Project/Utilities/preset_exercise.dart';
+import '../Utilities/preset_exercise.dart';
 
 class PresetPage extends StatelessWidget {
   final Function(String) onAddExercise;
@@ -9,16 +9,15 @@ class PresetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    State<HomePage> createState() => HomePageState();
+    //State<HomePage> createState() => HomePageState();
     List<PresetExercise> presets = PresetExercise.getPresetExerciseList();
+
     return Scaffold(
-      backgroundColor: Colors.black54,
       appBar: AppBar(
         title: Center(
           child: const Text(
             "Preset Exercise",
             style: TextStyle(
-              color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
@@ -37,12 +36,10 @@ class PresetPage extends StatelessWidget {
               title: Text(
                 exercise.name,
                 style: const TextStyle(
-                  color: Colors.white,
                   fontSize: 20,
                 ),
 
               ),
-              textColor: Colors.white,
               leading: const Icon(Icons.fitness_center, color: Colors.white),
               //trailing: const Icon(Icons.menu, color: Colors.white),
               trailing: SizedBox(
@@ -77,7 +74,6 @@ class PresetPage extends StatelessWidget {
                       Text(
                           exercise.description,
                           style: const TextStyle(
-                            color: Colors.white,
                             fontSize: 16,)
                       ),
                       const SizedBox(height: 10),

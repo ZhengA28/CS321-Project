@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'preset.dart';
 import 'settings.dart';
@@ -19,13 +17,13 @@ class HomePageState extends State<HomePage> {
   final duration_controller = TextEditingController();
 
   List pages = [];
-
   int page_index = 0;
-  void initState(){
+
+  void initState() {
     super.initState();
     pages = [
       ProfilePage(),
-      SettingsPage,
+      SettingsPage(),
       PresetPage(
         onAddExercise: (exerciseName) {
           createExercise(exerciseName: exerciseName);
@@ -33,14 +31,7 @@ class HomePageState extends State<HomePage> {
       ),
     ];
   }
-  /*
-  final List pages = [
-    //Array to store pages
-    ProfilePage(),
-    SettingsPage(),
-    PresetPage(),
-  ];
-  */
+
   List exercise_list = []; //Array to store created exercises
 
   ///Update the page index
@@ -95,15 +86,12 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black54,
-
       //Creates a bar at top of app
       appBar: AppBar(
         title: Center(
           child: Text(
             "FlexTimer",
             style: TextStyle(
-              color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
@@ -112,7 +100,7 @@ class HomePageState extends State<HomePage> {
 
         backgroundColor: Colors.teal[700],
         //elevation: 0, //If elevation set to 0, removes app bar shadow
-        //leading: Icon(Icons.menu),  //Creates Icon on left hand side
+
         actions: const [
           IconButton(
               onPressed: null, icon: Icon(Icons.add, color: Colors.black54))
@@ -121,72 +109,66 @@ class HomePageState extends State<HomePage> {
 
       //Creates a drawer (menu) on left hand side
       drawer: Drawer(
-          backgroundColor: Colors.cyan[100],
           child: Column(children: [
-            //Header of the drawer
-            DrawerHeader(
-                child: Icon(
-              Icons.timer,
-              size: 50,
-            )),
+        //Header of the drawer
+        DrawerHeader(
+            child: Icon(
+          Icons.timer,
+          size: 50,
+        )),
 
-            //List tile for home page
-            ListTile(
-                leading: Icon(Icons.home),
-                title: Text("H O M E"),
-                onTap: () {
-                  //Pop drawer first (close drawer so it is not open when user decides to go back to previous page)
-                  Navigator.pop(context);
-                  //Return to home page
-                  Navigator.pushNamed(context, 'homepage');
-                }),
+        //List tile for home page
+        ListTile(
+            leading: Icon(Icons.home),
+            title: Text("H O M E"),
+            onTap: () {
+              //Pop drawer first (close drawer so it is not open when user decides to go back to previous page)
+              Navigator.pop(context);
+              //Return to home page
+              Navigator.pushNamed(context, 'homepage');
+            }),
 
-            //List tile for settings
-            ListTile(
-                leading: Icon(Icons.settings),
-                title: Text("S E T T I N G S"),
-                onTap: () {
-                  //Go to settings page
-                  Navigator.pushNamed(context, 'settingspage');
-                }),
+        //List tile for preset exercise
+        ListTile(
+            leading: Icon(Icons.more_time_rounded),
+            title: Text("P R E S E T"),
+            onTap: () {
+              //Return to home page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PresetPage(
+                    onAddExercise: (exerciseName) {
+                      createExercise(exerciseName: exerciseName);
+                    },
+                  ),
+                ),
+              );
+            }),
 
-            //List tile for user profile
-            ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text("P R O F I L E"),
-                onTap: () {
-                  //Go to user profile page
-                  Navigator.pushNamed(context, 'profilepage');
-                }),
-
-            //List tile for workout routines
-            ListTile(
-                leading: Icon(Icons.more_time_rounded),
-                title: Text("Preset Exercise"),
-                onTap: () {
-                  //Return to home page
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>PresetPage(
-                          onAddExercise: (exerciseName) {
-                            createExercise(exerciseName: exerciseName);
-                          },
-                        ),
-                      ),
-                  );
-                }),
-          ])),
+        //List tile for user profile
+        ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text("P R O F I L E"),
+            onTap: () {
+              //Go to user profile page
+              Navigator.pushNamed(context, 'profilepage');
+            }),
+        //List tile for settings
+        ListTile(
+            leading: Icon(Icons.settings),
+            title: Text("S E T T I N G S"),
+            onTap: () {
+              //Go to settings page
+              Navigator.pushNamed(context, 'settingspage');
+            }),
+      ])),
 
       //Create a button for adding exercises
       floatingActionButton: FloatingActionButton(
           onPressed: createExercise,
           backgroundColor: Colors.teal,
-          child: Icon(
-            Icons.more_time_rounded,
-            size: 20,
-            color: Colors.white,
-          )),
+          child: Icon(Icons.more_time_rounded, size: 20)),
 
       //Display the exercises that are added by the user
       body: ListView.builder(
@@ -194,15 +176,13 @@ class HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             if (exercise_list.isEmpty) {
               return Center(
-                  child: Text(
-                      "No Exercise in Current Workout Plan",
-                      style: TextStyle(color: Colors.white, fontSize: 20)
-                  )
-              );
+                  child: Text("No Exercise in Current Workout Plan",
+                      style: TextStyle(fontSize: 20)));
             } else {
               return Exercise(
-                  name : exercise_list[index][0],
-                  duration: Duration(seconds: int.parse(exercise_list[index][1])),
+                  name: exercise_list[index][0],
+                  duration:
+                      Duration(seconds: int.parse(exercise_list[index][1])),
                   deleteExercise: (context) => deleteTask(index),
                   completeExercise: (context) => completeTask(index));
             }

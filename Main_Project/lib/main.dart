@@ -18,8 +18,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  int time = 0;
-  List names = ["Andy", "Karen", "Jacky", "Amy"];
 
   @override
   Widget build(BuildContext context) {
