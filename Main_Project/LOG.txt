@@ -2,8 +2,7 @@
 
 -Andy Zheng
 -2024-11-21 10:48pm
--Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete and finish exercises.
--Make sure to add 'flutter_slidable: ^3.1.1' under depenencies in pubspec.yaml
+-Made changes to Utilities/exercise.dart and Pages/home.dart. Changed how exercise objects are created and added a slider to delete and finish exercises. 
 
 -Andy Zheng
 -2024-11-24 8:34pm
@@ -14,3 +13,10 @@
 -Finished Settings UI and created theme(dark and light) file, theme_provider.dart.
 -TODO: Need to integrate Notifications and Allow Dark and Light mode to cover the whole system.
 -Make sure to add 'provider: 6.1.2' under dependencies in pubspec.yaml.
+
+-Indigo Flynch
+-2024-11-30 3:00am
+-Completed implementation of preset page UI
+-Added ability to add the exercises from the presets to the home
+-Changed createExercise in home.dart to accept a String parameter to allow usage from preset page. Still functions like normal
+-TODO: Add the ability to watch tutorial videos of the exercises listed in the presets page

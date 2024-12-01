@@ -18,14 +18,29 @@ class HomePageState extends State<HomePage> {
   final text_controller = TextEditingController();
   final duration_controller = TextEditingController();
 
+  List pages = [];
+
   int page_index = 0;
+  void initState(){
+    super.initState();
+    pages = [
+      ProfilePage(),
+      SettingsPage,
+      PresetPage(
+        onAddExercise: (exerciseName) {
+          createExercise(exerciseName: exerciseName);
+        },
+      ),
+    ];
+  }
+  /*
   final List pages = [
     //Array to store pages
     ProfilePage(),
     SettingsPage(),
     PresetPage(),
   ];
-
+  */
   List exercise_list = []; //Array to store created exercises
 
   ///Update the page index
@@ -36,7 +51,8 @@ class HomePageState extends State<HomePage> {
   }
 
   ///Shows a dialogue box for user to create a new exercise
-  void createExercise() {
+  void createExercise({String exerciseName = ''}) {
+    text_controller.text = exerciseName;
     showDialog(
       context: context,
       builder: (context) {
@@ -79,20 +95,24 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black54,
+
       //Creates a bar at top of app
       appBar: AppBar(
         title: Center(
           child: Text(
             "FlexTimer",
             style: TextStyle(
+              color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
+
         backgroundColor: Colors.teal[700],
         //elevation: 0, //If elevation set to 0, removes app bar shadow
-
+        //leading: Icon(Icons.menu),  //Creates Icon on left hand side
         actions: const [
           IconButton(
               onPressed: null, icon: Icon(Icons.add, color: Colors.black54))
@@ -101,6 +121,7 @@ class HomePageState extends State<HomePage> {
 
       //Creates a drawer (menu) on left hand side
       drawer: Drawer(
+          backgroundColor: Colors.cyan[100],
           child: Column(children: [
             //Header of the drawer
             DrawerHeader(
@@ -120,23 +141,6 @@ class HomePageState extends State<HomePage> {
                   Navigator.pushNamed(context, 'homepage');
                 }),
 
-            //List tile for preset exercise
-            ListTile(
-                leading: Icon(Icons.more_time_rounded),
-                title: Text("P R E S E T"),
-                onTap: () {
-                  Navigator.pushNamed(context, 'Preset');
-                }),
-
-            //List tile for profiles
-            ListTile(
-              leading: Icon(Icons.person_2_rounded),
-              title: Text("P R O F I L E"),
-              onTap: () {
-                Navigator.pushNamed(context, 'ProfilePage');
-              },
-            ),
-
             //List tile for settings
             ListTile(
                 leading: Icon(Icons.settings),
@@ -144,6 +148,24 @@ class HomePageState extends State<HomePage> {
                 onTap: () {
                   //Go to settings page
                   Navigator.pushNamed(context, 'settingspage');
+                }),
+
+            //List tile for workout routines
+            ListTile(
+                leading: Icon(Icons.more_time_rounded),
+                title: Text("Preset Exercise"),
+                onTap: () {
+                  //Return to home page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>PresetPage(
+                          onAddExercise: (exerciseName) {
+                            createExercise(exerciseName: exerciseName);
+                          },
+                        ),
+                      ),
+                  );
                 }),
           ])),
 
@@ -165,7 +187,7 @@ class HomePageState extends State<HomePage> {
               return Center(
                   child: Text(
                       "No Exercise in Current Workout Plan",
-                      style: TextStyle(fontSize: 20)
+                      style: TextStyle(color: Colors.white, fontSize: 20)
                   )
               );
             } else {

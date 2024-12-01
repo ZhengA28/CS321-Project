@@ -18,6 +18,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
+  int time = 0;
+  List names = ["Andy", "Karen", "Jacky", "Amy"];
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,12 @@ class MyApp extends StatelessWidget {
       home: const HomePage(), // Initial Page on app startup
 
       routes: { // List of pages for navigation
-        'homepage': (context) => const HomePage(),
-        'presetpage': (context) => const PresetPage(),
+        '/homepage': (context) => const HomePage(),
+        'presetpage': (context) => PresetPage(
+          onAddExercise: (exerciseName) {
+            print("");
+          },
+        ),
         'profilepage': (context) => const ProfilePage(),
         'settingspage': (context) => const SettingsPage(),
       },
