@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tutorial_project/Database/local_data.dart';
 import 'preset.dart';
 import 'settings.dart';
 import 'user_profile.dart';
@@ -13,13 +15,23 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final myBox = Hive.box('MyBox');
+  LocalDatabase db = LocalDatabase();
+
   final text_controller = TextEditingController();
   final duration_controller = TextEditingController();
-
   List pages = [];
   int page_index = 0;
 
   void initState() {
+    //Check if app open for first time
+    if(myBox.get("EXERCISE") == null){
+      db.initialData();
+    }
+    else{
+      db.loadData();
+    }
+
     super.initState();
     pages = [
       ProfilePage(),
@@ -32,7 +44,7 @@ class HomePageState extends State<HomePage> {
     ];
   }
 
-  List exercise_list = []; //Array to store created exercises
+  //List exercise_list = []; //Array to store created exercises
 
   ///Update the page index
   void updatePage(int index) {
@@ -59,28 +71,31 @@ class HomePageState extends State<HomePage> {
 
   void deleteTask(int index) {
     setState(() {
-      exercise_list.removeAt(index);
+      db.exercise_List.removeAt(index);
     });
+    db.updateData();
   }
 
   void completeTask(index) {
     setState(() {
-      List temp = exercise_list[index];
-      exercise_list.removeAt(index);
-      exercise_list.add(temp);
+      List temp = db.exercise_List[index];
+      db.exercise_List.removeAt(index);
+      db.exercise_List.add(temp);
     });
+    db.updateData();
   }
 
   ///Creates a new exercise object and add it to the list
   void saveExercise() {
     setState(() {
-      exercise_list.add([text_controller.text, duration_controller.text]);
+      db.exercise_List.add([text_controller.text, duration_controller.text]);
 
       //Clear the text box
       text_controller.clear();
       duration_controller.clear();
     });
     Navigator.of(context).pop(); //Closes dialogue box after adding to list
+    db.updateData();
   }
 
   @override
@@ -172,17 +187,17 @@ class HomePageState extends State<HomePage> {
 
       //Display the exercises that are added by the user
       body: ListView.builder(
-          itemCount: exercise_list.isEmpty ? 1 : exercise_list.length,
+          itemCount: db.exercise_List.isEmpty ? 1 : db.exercise_List.length,
           itemBuilder: (context, index) {
-            if (exercise_list.isEmpty) {
+            if (db.exercise_List.isEmpty) {
               return Center(
                   child: Text("No Exercise in Current Workout Plan",
                       style: TextStyle(fontSize: 20)));
             } else {
               return Exercise(
-                  name: exercise_list[index][0],
+                  name: db.exercise_List[index][0],
                   duration:
-                      Duration(seconds: int.parse(exercise_list[index][1])),
+                      Duration(seconds: int.parse(db.exercise_List[index][1])),
                   deleteExercise: (context) => deleteTask(index),
                   completeExercise: (context) => completeTask(index));
             }

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'pages/home.dart';
 import 'pages/preset.dart';
 import 'pages/user_profile.dart';
 import 'pages/settings.dart';
-
 import 'package:provider/provider.dart'; // Import provider
 import 'Utilities/theme_provider.dart'; // Import ThemeProvider
 
-void main() {
+void main() async{
+  //Initialize hive
+  await Hive.initFlutter();
+  var box = await Hive.openBox('myBox');
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(), // ThemeProvider Global
