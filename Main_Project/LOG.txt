@@ -33,4 +33,15 @@
 -Added Flutter Hive to store app data locally (data persistent)
 -Added additional file .../Database/local_data
 -Make sure to add 'hive: ^2.2.3' and 'hive_flutter: ^1.1.0' under dependencies in pubspec.yaml
--Make sure to add 'hive_generator: ^1.1.3' and 'build_runner: ^2.1.11' under dev_dependencies in pubspec.yml
+-Make sure to add 'hive_generator: ^1.1.3' and 'build_runner: ^2.1.11' under dev_dependencies in pubspec.yaml
+
+-Autumn Sterling
+-2024-12-04 8:45pm
+-Uploaded backend files
+-Added backend integration for user login via Django, with a POST request at /api/login/. 
+-Added User_Login.dart in frontend/pages in Flutter for handling django rest user authentication through front end input
+-Updated main.dart to include routing for the login page.
+-Added support for secure handling of SECRET_KEY in settings.py
+-Updated README with backend setup instructions
+-Flutter dependencies added : 'http: ^1.2.2'
+
