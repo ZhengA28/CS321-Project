@@ -160,7 +160,19 @@ class HomePageState extends State<HomePage> {
                 ),
               );
             }),
-
+  
+        //List tile for user login
+        ListTile(
+        leading : Icon(Icons.login),
+        title: Text("L O G I N"),
+        onTap: () {
+          // Close drawer menu
+          Navigator.pop(context);
+          //Go to login page
+          Navigator.pushNamed(context, 'loginpage');
+        }
+        ),
+            
         //List tile for user profile
         ListTile(
             leading: Icon(Icons.account_circle),
