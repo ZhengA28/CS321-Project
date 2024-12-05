@@ -1,0 +1,33 @@
+from rest_framework import serializers
+from django.contrib.auth.models import User
+from .models import Workout, PresetExercise, CustomExercise  
+
+class PresetExerciseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PresetExercise  #model to be transformed
+        fields = '__all__' #attributes from model to be transformed
+
+class CustomExerciseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomExercise  #model to be transformed
+        fields = '__all__' #attributes from model to be transformed
+
+class WorkoutSerializer(serializers.ModelSerializer):
+    exercises = PresetExerciseSerializer(many=True, read_only=True)
+    custom_exercises = CustomExerciseSerializer(many=True, read_only=True)
+    class Meta:
+        model = Workout
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password']  # Minimal fields
+
+    # Ensure passwords are hashed before saving
+    def create(self, validated_data):
+        user = User(username=validated_data['username'])
+        user.set_password(validated_data['password'])  # Hash the password
+        user.save()
+        return user
