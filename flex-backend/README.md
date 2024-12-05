@@ -78,7 +78,8 @@ This is the backend for the Flex Timer project, built with Django and Django RES
   ```
   to test API endpoints.
 
-## Next Steps:
+## TO-DO:
 - Security enhancement
-- Deploy to AWS or another hosting platform for shared testing.
+- Deploy to AWS for shared testing.
 - Integrate persistent login and authorization in the Flutter frontend.
+- Integrate local preset exercise database info from flutter -> django preset_exercise database
