@@ -26,7 +26,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
       try {
         //send POST request 'login_user'
         final response = await http.post(
-          Uri.parse('http://127.0.0.1:8000/api/login/'), //Change if needed
+          Uri.parse('http://3.139.72.184:8000/api/login/'), //Change if needed
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'username': username, 'password': password}),
         );
