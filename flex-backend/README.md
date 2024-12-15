@@ -47,13 +47,13 @@ This is the backend for the Flex Timer project, built with Django and Django RES
    ```bash
    python manage.py runserver
    ```
-   The server will run on [http://127.0.0.1:8000](http://127.0.0.1:8000) (for now).
+   The server will run on [http://3.139.72.184:8000](http://3.139.72.184:8000/) (for now).
    
 
 
 ## API Endpoints:
-- prefix with : **'http://127.0.0.1:8000'**
-- admin login example: http://127.0.0.1:8000/admin/login/?next=/admin/
+- prefix with : **'http://3.139.72.184:8000'**
+- admin login example: http://3.139.72.184:8000/admin/login/?next=/admin/
 <img width="692" alt="Screenshot 2024-12-04 at 8 30 55 PM" src="https://github.com/user-attachments/assets/c2cc1b84-2679-4fa6-9662-6f3d55f7512c">
 
 ### Authentication:
@@ -80,6 +80,5 @@ This is the backend for the Flex Timer project, built with Django and Django RES
 
 ## TO-DO:
 - Security enhancement
-- Deploy to AWS for shared testing.
 - Integrate persistent login and authorization in the Flutter frontend.
 - Integrate local preset exercise database info from flutter -> django preset_exercise database
